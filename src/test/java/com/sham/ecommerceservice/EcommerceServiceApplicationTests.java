@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class EcommerceServiceApplicationTests {
 
 	@Container
-	private static final MySQLContainer MY_SQL_CONTAINER = new MySQLContainer("mysql:");
+	private static final MySQLContainer MY_SQL_CONTAINER = new MySQLContainer("mysql:latest");
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -57,6 +57,24 @@ class EcommerceServiceApplicationTests {
 				.content(productRequestString))
 				.andExpect(status().isCreated());
 		Assertions.assertEquals(1, productRepo.findAll().size());
+		//INSERT INTO `ecommerce`.`product`
+		//(`id`,
+		//`description`,
+		//`name`,
+		//`price`)
+		//VALUES
+		//('9d8c2c7d-78c3-4d27-a1c6-8e2b42aa553c',
+		//'Good quality smartphone',
+		//'IPhone 13',
+		//5000.00);
+
+		//CREATE TABLE `product` (
+		//  `id` varchar(255) NOT NULL,
+		//  `description` varchar(255) DEFAULT NULL,
+		//  `name` varchar(2000) NOT NULL,
+		//  `price` decimal(19,2) NOT NULL,
+		//  PRIMARY KEY (`id`)
+		//)
 	}
 
 	private ProductPojo getProductRequest(){

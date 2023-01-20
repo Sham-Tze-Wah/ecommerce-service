@@ -14,7 +14,7 @@ public class JpaConfig {
     {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName("com.mysql.cj.jdbc.Driver");
-        dataSourceBuilder.url("jdbc:mysql://localhost:3306/ecommerce?allowPublicKeyRetrieval=true&useSSL=FALSE");
+        dataSourceBuilder.url("jdbc:mysql://localhost:3307/ecommerce?allowPublicKeyRetrieval=true&useSSL=FALSE");
         dataSourceBuilder.username("root");
         dataSourceBuilder.password("1234");
         return dataSourceBuilder.build();
