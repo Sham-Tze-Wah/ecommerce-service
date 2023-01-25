@@ -28,7 +28,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class EcommerceServiceApplicationTests {
 
 	@Container
-	private static final MySQLContainer MY_SQL_CONTAINER = new MySQLContainer("mysql:latest");
+	private static final MySQLContainer MY_SQL_CONTAINER = new MySQLContainer("mysql:latest")
+			.withDatabaseName("ecommerce");
 
 	@Autowired
 	private MockMvc mockMvc;

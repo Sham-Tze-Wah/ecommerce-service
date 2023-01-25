@@ -1,13 +1,21 @@
 version: "3"
 services:
-  my-web-app-db:
-    image: mysql
+  ecommerce-service:
+    image: ecommerce-service
+    ports:
+      -"8080:8080"
+    networks:
+      - ecommerce-mysql
+    depends_on:
+      - docker-ecommerce
+
+  docker-ecommerce:
+    image: mysql:latest
+    networks:
+      - ecommerce-mysql
     environment:
       - MYSQL_ROOT_PASSWORD=1234
       - MYSQL_DATABASE=ecommerce
-  my-web-app:
-    build: .
-    ports:
-      - "8080:8080"
-    depends_on:
-      - my-web-app-db
+
+  networks:
+    ecommerce-mysql:

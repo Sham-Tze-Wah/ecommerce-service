@@ -1,4 +1,4 @@
-docker run --name ecommerce -p 3307:3307 -e MYSQL_ROOT_PASSWORD=1234 -d mysql
+docker run --name docker-ecommerce -p 3307:3306 -e MYSQL_ROOT_PASSWORD=1234 -d mysql:latest
 
 docker ps
 
@@ -14,4 +14,21 @@ docker logs ecommerce
 
 docker run ?1:?2 -d -e -p --name
 https://www.softwaretestinghelp.com/mysql-docker/
+=======================================================
+https://www.javainuse.com/devOps/docker/docker-mysql
 
+docker network create ecommerce-mysql
+docker container run --name docker-ecommerce --network ecommerce-mysql -p 3307:3306 -e MYSQL_DATABASE=ecommerce -e MYSQL_ROOT_PASSWORD=1234 -d mysql:latest
+docker start docker-ecommerce
+docker container exec -it docker-ecommerce bash
+show databases;
+exit;
+exit
+cd "C:\Practice\ecommerce-service"
+docker image build -t ecommerce-service .
+docker container run --network ecommerce-mysql --name employee-service-container -p 8080:8080 -d employee-jdbc
+curl --header "Content-Type: application/json"   --request POST   --data '{
+                                                                          "name" : "Iphone 13",
+                                                                          "description" : "Iphone 13",
+                                                                          "price" : 5000
+                                                                          }'   http://localhost:8080/insertemployee
