@@ -11,6 +11,8 @@ services:
 
   docker-ecommerce:
     image: mysql:latest
+    ports:
+      - "3307:3306"
     networks:
       - ecommerce-mysql
     environment:
