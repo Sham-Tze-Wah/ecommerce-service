@@ -2,6 +2,7 @@ package com.sham.ecommerceservice.service;
 
 import com.sham.ecommerceservice.dto.ProductResponse;
 import com.sham.ecommerceservice.entity.Product;
+import com.sham.ecommerceservice.pojo.ProductFilterParam;
 import com.sham.ecommerceservice.pojo.ProductPojo;
 import com.sham.ecommerceservice.repository.ProductRepo;
 import lombok.extern.slf4j.Slf4j;
@@ -46,5 +47,9 @@ public class ProductService {
                 .description(product.getDescription())
                 .price(product.getPrice())
                 .build();
+    }
+
+    public List<ProductResponse> getAllProducts(ProductFilterParam productFilterParam) {
+        return null;
     }
 }
