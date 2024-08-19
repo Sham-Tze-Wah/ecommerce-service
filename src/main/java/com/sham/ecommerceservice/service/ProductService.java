@@ -50,6 +50,7 @@ public class ProductService {
     }
 
     public List<ProductResponse> getAllProducts(ProductFilterParam productFilterParam) {
+        log.info("product start price filtering: {}",productFilterParam.startPrice());
         return null;
     }
 }

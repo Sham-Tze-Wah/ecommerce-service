@@ -3,12 +3,13 @@ package com.sham.ecommerceservice.pojo;
 import lombok.Data;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@Data
-public class ProductFilterParam {
-    private String name;
-    private String startPrice;
-    private String endPrice;
-    private String category;
-    private String brand;
-    private Double rating;
+public record ProductFilterParam(String name, Double startPrice, Double endPrice, String category, String brand, Double rating) {
+    public ProductFilterParam(String name, Double startPrice, Double endPrice, String category, String brand, Double rating){
+        this.name = name;
+        this.startPrice = startPrice;
+        this.endPrice = endPrice;
+        this.category = category;
+        this.brand = brand;
+        this.rating = rating;
+    }
 }

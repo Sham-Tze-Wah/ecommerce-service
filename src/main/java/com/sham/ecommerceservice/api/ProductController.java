@@ -4,6 +4,7 @@ import com.sham.ecommerceservice.dto.ProductResponse;
 import com.sham.ecommerceservice.pojo.ProductFilterParam;
 import com.sham.ecommerceservice.pojo.ProductPojo;
 import com.sham.ecommerceservice.service.ProductService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Locale;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api")
 public class ProductController {
 
@@ -39,20 +41,21 @@ public class ProductController {
     @GetMapping("/products")
     public ResponseEntity<?> getProducts(
             @RequestParam(required = false) String name,
-            @RequestParam(required = false) String startPrice,
-            @RequestParam(required = false) String endPrice,
+            @RequestParam(required = false) Double startPrice,
+            @RequestParam(required = false) Double endPrice,
             @RequestParam(required = false) String category,
             @RequestParam(required = false) String brand,
             @RequestParam(required = false) Double rating
             ){
         try{
-            ProductFilterParam productFilterParam = new ProductFilterParam();
-            productFilterParam.setName(name);
-            productFilterParam.setStartPrice(startPrice);
-            productFilterParam.setEndPrice(endPrice);
-            productFilterParam.setCategory(category);
-            productFilterParam.setBrand(brand);
-            productFilterParam.setRating(rating);
+            ProductFilterParam productFilterParam = new ProductFilterParam(
+                    name,
+                    startPrice,
+                    endPrice,
+                    category,
+                    brand,
+                    rating
+            );
             return new ResponseEntity<>(
                     productService.getAllProducts(productFilterParam),
                     HttpStatus.OK
