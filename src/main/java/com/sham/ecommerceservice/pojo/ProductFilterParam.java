@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.web.bind.annotation.RequestParam;
 
 public record ProductFilterParam(String name, Double startPrice, Double endPrice, String category, String brand, Double rating) {
+
     public ProductFilterParam(String name, Double startPrice, Double endPrice, String category, String brand, Double rating){
         this.name = name;
         this.startPrice = startPrice;
@@ -12,4 +13,6 @@ public record ProductFilterParam(String name, Double startPrice, Double endPrice
         this.brand = brand;
         this.rating = rating;
     }
+
+
 }
