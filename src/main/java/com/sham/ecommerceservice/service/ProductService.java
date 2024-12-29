@@ -24,14 +24,13 @@ public class ProductService {
 
     public void createProduct(ProductPojo productRequest){
         Product product = Product.builder()
-                .id(productRequest.getId())
                 .name(productRequest.getName())
                 .description(productRequest.getDescription())
                 .price(productRequest.getPrice())
                 .build();
 
         productRepo.save(product);
-        log.info("Product {} is saved", product.getId());
+        log.info("Product {} is saved", product.getName());
     }
 
     public List<ProductResponse> getAllProducts() {
@@ -42,7 +41,6 @@ public class ProductService {
 
     private ProductResponse mapToProductResponse(Product product){
         return ProductResponse.builder()
-                .id(product.getId())
                 .name(product.getName())
                 .description(product.getDescription())
                 .price(product.getPrice())
