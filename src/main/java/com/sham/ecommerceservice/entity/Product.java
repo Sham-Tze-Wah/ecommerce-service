@@ -1,37 +1,37 @@
 package com.sham.ecommerceservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sham.ecommerceservice.constant.SqlDataType;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
+import jakarta.persistence.*;
+import lombok.*;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.UUID;
+import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@Entity
-@Table(name = "product")
 @Data
-public class Product {
-    @Id
-    @Column(name = "id")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id = UUID.randomUUID().toString();
+@EqualsAndHashCode(callSuper = true, exclude = {"orderLines"})
+@Entity
+@Table(name="product")
+@Builder
+public class Product extends BaseEntity implements Serializable {
 
-    @Column(name = "name", nullable = false, length = SqlDataType.VARCHAR2000)
+    @Column(name = "name", length = SqlDataType.VARCHAR2000)
+    @NonNull
     private String name;
 
     @Column(name = "description")
     private String description;
 
-    @Column(name = "price", nullable = false)
-    private BigDecimal price;
+    @Column(name = "price", precision = 12, scale = 2)
+    @NonNull
+    private BigDecimal price = BigDecimal.ZERO;
+
+    @Column(name = "quantity", columnDefinition = "INTEGER DEFAULT 0")
+    private int quantity;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ToString.Exclude
+    private List<OrderLine> orderLines;
 }

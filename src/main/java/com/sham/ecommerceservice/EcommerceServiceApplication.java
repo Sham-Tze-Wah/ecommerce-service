@@ -20,6 +20,7 @@ public class EcommerceServiceApplication {
 //		String str = "abcd";
 //		long num = 1 * 2 * 3;
 //		readFile("C:\\Users\\Admin\\Documents\\My documents\\testing.txt");
+//		System.out.println("The product management app is running...");
 		SpringApplication.run(EcommerceServiceApplication.class, args);
 	}
 
