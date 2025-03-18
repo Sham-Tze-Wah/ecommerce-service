@@ -28,7 +28,7 @@ public class ProductController {
     private ProductService productService;
 
     @Autowired
-    private final MessageSource messageSource;
+    private MessageSource messageSource;
 
     @PostMapping("/post")
     @ResponseStatus(HttpStatus.CREATED)
