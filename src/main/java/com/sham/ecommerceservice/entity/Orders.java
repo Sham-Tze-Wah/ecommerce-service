@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true, exclude = {"orderLines"})
 @Entity
 @Table(name="orders")
+@NoArgsConstructor
 public class Orders extends BaseEntity implements Serializable {
     @Column(name = "order_date")
     @Temporal(TemporalType.TIMESTAMP)
@@ -28,7 +30,7 @@ public class Orders extends BaseEntity implements Serializable {
 
     @Column(name = "shipped_date")
     @Temporal(TemporalType.TIMESTAMP)
-    private String shippedDate;
+    private LocalDateTime shippedDate;
 
     @Column(name = "total_price", precision = 12, scale = 2)
     private BigDecimal totalPrice = BigDecimal.ZERO;

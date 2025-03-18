@@ -7,13 +7,14 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-@EqualsAndHashCode(callSuper = true, exclude = {"orderLines"})
+@EqualsAndHashCode(callSuper = true, exclude = {"orderLines", "promotions"})
 @Entity
 @Table(name="product")
-@Builder
+@NoArgsConstructor
 public class Product extends BaseEntity implements Serializable {
 
     @Column(name = "name", length = SqlDataType.VARCHAR2000)
@@ -34,4 +35,9 @@ public class Product extends BaseEntity implements Serializable {
     @JsonIgnore
     @ToString.Exclude
     private List<OrderLine> orderLines;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ToString.Exclude
+    private List<Promotion> promotions;
 }

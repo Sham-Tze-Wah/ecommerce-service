@@ -4,6 +4,7 @@ import com.sham.ecommerceservice.constant.SqlDataType;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true, exclude = {"orders"})
 @Entity
 @Table(name="shipping_option")
+@NoArgsConstructor
 public class ShippingOption extends BaseEntity implements Serializable {
     @Column(name = "name")
     @NonNull

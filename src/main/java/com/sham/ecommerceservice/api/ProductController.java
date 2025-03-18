@@ -1,24 +1,28 @@
 package com.sham.ecommerceservice.api;
 
 import com.sham.ecommerceservice.dto.ProductResponse;
-import com.sham.ecommerceservice.pojo.ProductFilterParam;
-import com.sham.ecommerceservice.pojo.ProductPojo;
+import com.sham.ecommerceservice.dto.ProductFilterParam;
+import com.sham.ecommerceservice.dto.ProductDTO;
 import com.sham.ecommerceservice.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Locale;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/product")
 public class ProductController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
 
     @Autowired
     private ProductService productService;
@@ -28,8 +32,9 @@ public class ProductController {
 
     @PostMapping("/post")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createProduct(@RequestBody ProductPojo productRequest){
-        productService.createProduct(productRequest);
+    public void createProduct(@RequestBody ProductDTO productRequest,
+                              @RequestParam("mediaFiles") MultipartFile[] files){
+        productService.createProduct(productRequest, files);
     }
 
     @GetMapping("/get")
@@ -39,7 +44,7 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public ResponseEntity<?> getProducts(
+    public ResponseEntity<?> getFilteredProducts(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) Double startPrice,
             @RequestParam(required = false) Double endPrice,
@@ -62,6 +67,7 @@ public class ProductController {
             );
         }
         catch(Exception ex){
+            LOGGER.error("Exception in getFilteredProducts API: {}", ex);
             return new ResponseEntity<>(
                     messageSource.getMessage("product.invalid", null, Locale.ENGLISH),
                     HttpStatus.UNPROCESSABLE_ENTITY);

@@ -12,7 +12,7 @@ public class AppMessageConfiguration {
         ReloadableResourceBundleMessageSource messageSource
                 = new ReloadableResourceBundleMessageSource();
 
-        messageSource.setBasename("classpath:messages");
+        messageSource.setBasename("classpath:messages/message");
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }

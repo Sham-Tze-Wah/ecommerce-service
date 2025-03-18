@@ -16,6 +16,7 @@ import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -33,6 +34,9 @@ import java.util.Properties;
  *  @ComponentScan: to specify the packages that we want to be scanned.
  *  @SpringBootConfiguration:  class-level annotation that is part of the Spring Boot framework. It indicates that a class provides application configuration.
  * @EnableConfigurationProperties: In order to use a configuration class in our project, we need to register it as a regular Spring bean.
+ * Source for hibernate config: https://docs.jboss.org/hibernate/core/3.3/reference/en/html/session-configuration.html#configuration-programmatic
+ * Source for JPA config: https://www.baeldung.com/the-persistence-layer-with-spring-and-jpa
+ * Source for setting hibernate.naming strategy: https://stackoverflow.com/questions/40509395/cant-set-jpa-naming-strategy-after-configuring-multiple-data-sources-spring-1
  */
 
 @Configuration
@@ -44,8 +48,9 @@ import java.util.Properties;
 @EntityScan(
         basePackages = {"com.sham.ecommerceservice.entity"}
 )
+@EnableTransactionManagement //on by default, can ignore
+@EnableJpaAuditing
 @Slf4j
-//@EnableTransactionManagement //on by default, can ignore
 //@Primary
 public class JpaConfig {
 

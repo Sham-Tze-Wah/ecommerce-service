@@ -1,6 +1,8 @@
 package com.sham.ecommerceservice.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -14,6 +16,8 @@ import java.util.UUID;
 
 @MappedSuperclass // to enable embedding of its properties in the concrete subclass tables.
 @EntityListeners(AuditingEntityListener.class) //  listens to lifecycle events (e.g., insert, update) of the entity and populates audit-related fields like creation time, last modified time, created by, and modified by.
+@Getter
+@Setter
 public abstract class BaseEntity {
     @Id
     @GeneratedValue

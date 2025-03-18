@@ -3,6 +3,7 @@ package com.sham.ecommerceservice.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -11,6 +12,7 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true, exclude = {"rolesSet"})
 @Entity
 @Table(name="permissions")
+@NoArgsConstructor
 public class Permissions extends BaseEntity implements Serializable {
     @Column(name = "name")
     private String name;

@@ -11,9 +11,10 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true, exclude = {"rolesSet"})
 @Entity
 @Table(name="account")
-public abstract class Account extends BaseEntity {
+@NoArgsConstructor
+public class Account extends BaseEntity {
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
 
     @Column(name = "hashed_pwd")
